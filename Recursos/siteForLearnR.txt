@@ -1,0 +1,28 @@
+Para r markdown
+Yarl headers
+https://zsmith27.github.io/rmarkdown_crash-course/lesson-4-yaml-headers.html
+https://bookdown.org/yihui/rmarkdown/html-document.html
+
+Getting started r markdown
+https://ourcodingclub.github.io/tutorials/rmarkdown/
+https://r4ds.had.co.nz/r-markdown.html
+
+Documentacion en R (roxygen)
+https://cran.r-project.org/web/packages/roxygen2/vignettes/roxygen2.html
+https://r-pkgs.org/man.html
+https://cran.r-project.org/web/packages/roxygen2/vignettes/rd.html
+
+Plot
+https://r-coder.com/plot-en-r/#Titulo_en_LaTeX
+
+https://shiny.rstudio.com/articles/rmarkdown.html
+https://shiny.rstudio.com/articles/interactive-docs.html
+https://rstudio.github.io/visual-markdown-editing/
+
+https://blog.rstudio.com/2020/09/30/rstudio-v1-4-preview-visual-markdown-editing/
+
+
+Gettin started R
+Firt read and see what is R and CRAN
+https://cran.r-project.org/
+
