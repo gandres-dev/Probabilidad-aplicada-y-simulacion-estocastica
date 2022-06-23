@@ -8,11 +8,11 @@ output:
     df_print: paged
 ---
 
-```{r, setup, include=FALSE}
+```R
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-# El método
+# El método Montecarlo
 
 Existe un modo curioso de calcular el valor aproximado de $\pi$. Para ello, debemos dibujar un cuadrilátero, y dentro de él un círculo.
 
@@ -57,7 +57,7 @@ El método montecarlo consiste en la realización de pruebas aleatorias para un 
 
 Para este experimento, primeros necesitaremos conocer las funciones que nos ayudaran a generar numeros aleatorios, en R tenemos:
 
-```{R, results = 'hide'}
+```R
 # Obtención de números aleatorios con sample, devuelve entero.
 sample(1:8, 2, replace = TRUE)
 
@@ -69,7 +69,7 @@ Dado que nuestro experimento usaremos un circulo unitario que vaya del -1 a 1 lo
 
 Para proseguir con nuestro experimento, crearemos una función que detecte las gotas que estén adentro del circulo:
 
-```{R}
+```R
 #' Cuenta las gotas que están dentro del circulo.
 #'
 #' @param n numero de gotas del experimento.
@@ -92,7 +92,7 @@ Para hacer nuestra simulación, utilizaremos nuestra función de números aleato
 
 Para seguir con nuestra simulación, crearemos nuestra función principal la cual llamara a la función `gotas_dentro()` y calculara el número aproximado de $\pi$.
 
-```{R}
+```R
 #' Simula el experimento de gotas de lluvia para aproximar \pi.
 #'
 #' @param num_gotas es el numero total de gotas del experimento. 
@@ -114,7 +114,7 @@ En esta función encontraremos los valores de pi por cada experimento a realizar
 
 La función `graficar_simulacion` solo es la encargada de de hacer la gráfica correspondiente y darle presentación de la mejor manera.
 
-```{r}
+```r
 #' Genera una grafica que representa la simulación.
 #'
 #' @param x es un vector con un numero de gotas.
@@ -131,7 +131,7 @@ graficar_simulacion <- function (x, y) {
 
 Por último, llamaremos nuestra función y veremos los resultados:
 
-```{R}
+```R
 aproximaciones_pi <- simulacion_lluvia(2000)
 ```
 
