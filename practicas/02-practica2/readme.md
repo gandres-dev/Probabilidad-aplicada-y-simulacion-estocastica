@@ -30,6 +30,8 @@ $$\pi \approx 4 \frac{Gotas_{círculo}}{Gotas_{cuadrado}}$$
 
 En la siguiente gráfica podemos ver cómo el valor aproximado de Pi, calculado de éste modo, se aproxima al valor real cuando el número de gotas se hace grande.
 
+![gotas](img/montecarlo-pi-200.gif)
+
 Éste tipo de métodos se utilizan muy a menudo en cálculo numérico, pero en lugar de incómodas gotas de lluvia se usan puntos al azar generados por una computadora. Se conocen como métodos de Montecarlo, en honor a sus famosos casinos (por aquello del azar).
 
 Como a la computadora no le da pereza ponerse a contar puntitos, voy a pedirle que simule 100000 gotitas. El resultado obtenido en un caso como ese es:
