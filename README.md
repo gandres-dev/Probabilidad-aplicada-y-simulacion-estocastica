@@ -1,6 +1,13 @@
 ## Curso de Probabilidad Aplicada y Simulación Estocástica, IIMAS-UNAM
 Este repositorio contiene notas,practicas, tareas y proyectos del curso de Probabilidad Aplicada y Simulación Estocástica impartido en la [Licenciatura en Ciencia de Datos](https://cienciadatos.iimas.unam.mx/) en el [IIMAS](https://www.iimas.unam.mx/).
 
+## Prácticas
+- [Práctica 1 Matriz de Hilbert y Regla de Simpson](https://github.com/gandres-dev/Probabilidad-aplicada-y-simulacion-estocastica/blob/main/practicas/01-practica1/Practica1_PASE.pdf)
+- [Práctica 2 Calculando pi con gotas de lluvia](https://github.com/gandres-dev/Probabilidad-aplicada-y-simulacion-estocastica/tree/main/practicas/02-practica2)
+- [Práctica 3 Generación de Números Aleatorios](https://github.com/gandres-dev/Probabilidad-aplicada-y-simulacion-estocastica/tree/main/practicas/03-practica3)
+<!-- - []() -->
+
+---
 
 ## Temario
 1. **Introducción**
@@ -74,7 +81,7 @@ Este repositorio contiene notas,practicas, tareas y proyectos del curso de Proba
     - Clasificación de estados
     - Simular: Page Rank
 
-6. Modelos y Simulación estocástica (Temas selectos)**
+6. **Modelos y Simulación estocástica (Temas selectos)**
     1. **Métodos de reducción de varianza**
     - Algoritmo de Metropolis-Hasting, Gibbs, Recocido simulado
     2. **Procesos Poisson**
@@ -84,7 +91,7 @@ Este repositorio contiene notas,practicas, tareas y proyectos del curso de Proba
     - Introducción a generadores infinitesimales
     - Modelos exponenciales M/M/1, Sistemas M/G/1 y multiservidor
 
-
+---
 ## Bibliografía básica:
 1. Fishman, G.S. (2006). A First Course on Monte Carlo. Duxbury Press.
 2. Ripley, B.D. (2009). Stochastic Simulation. Wiley.
@@ -95,12 +102,12 @@ Amsterdam.
 5. Ross,S.M. (2010). A First Course in Probability (8th ed.). Prentice-Hall: New
 Jersey.
 
-
+---
 ## Profesora
 **Laura Eslava**
   <!-- - Correo: blancavazquez2013[arroba]gmail.com -->
 
-
+---
 ## Recursos electrónicos
 1. Grinstead, C.M. and Snell, J.L. (2011). Introduction to Probability. American Mathematical Society.[Liga](https://www.math.dartmouth.edu/~prob/prob/prob.pdf)
 2. Kerns, G.J. (2013). IPSUR: Introduction to Probability and Statistics Using R. [Liga](https://rdrr.io/cran/IPSUR/)
