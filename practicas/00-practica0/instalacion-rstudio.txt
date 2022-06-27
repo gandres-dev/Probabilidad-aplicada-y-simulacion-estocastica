@@ -3,5 +3,12 @@ sudo dnf install r
 sudo dnf install rstudio
 sudo dnf install rstudio-desktop
 
-#Expresion regular para vscode para los readme.md
+# Expresion regular para vscode para los readme.md
 \{r.*\}
+
+Replace `\{r.*\} to {R}
+Replace ```\{r.*\} to \begin{lstlisting}[language=r,style=frame,style=linenumbers]
+Replace ``` to \end{lstlisting}
+
+
+Replace \\(end|begin)\{equation\**\} to $$$$
