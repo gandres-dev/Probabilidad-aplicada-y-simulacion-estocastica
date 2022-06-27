@@ -50,7 +50,7 @@ Para la entrega cada integrante del equipo deberá mandar el código y un archiv
 ## Generador lineal congruencial
 El generedor lineal congruencial es uno de varios algortimos para generar numeros pseudoaleatorios. Se basa en una relacion de recurrencia, es decir, para generar cada número aleatorio se debe utilizar el anterior y así sucesivamente.
 
-```{R}
+```r
 #' Genenerador lineal congruencial
 #'
 #' @param n es la cantidad de números a generar.
@@ -70,7 +70,7 @@ generador_congruencial <- function(n, semilla, m, a, c){
 ```
 
 Procedemos a probar nuestra función:
-```{R}
+```r
 # Para n=3, semilla=15, mod=100, a=50, c=16
 generador_congruencial(3, 15, 100, 50, 16)
 
@@ -79,7 +79,7 @@ generador_congruencial(10, 4, 100, 50, 16)
 
 Vemos que el periodo de nuestros números aleatorios es muy pequeño ya que observamos que en el tercer numero se vuelve a repetir. Ahora trataremos de cambiar los valores de la semilla y de las constantes a y c;
 
-```{R}
+```r
 generador_congruencial(28, 23, 100, 32, 53)
 
 generador_congruencial(28, 67, 100, 45, 23)
@@ -89,7 +89,7 @@ Ahora podemos observar que nuestra serie de número aleatorios todavía sigue te
 
 Ahora procederemos generar un sucesión de números aleatorios cuando $c=0$:
 
-```{R}
+```r
 # Cuando c = 0
 generador_congruencial(50, 23, 100, 77, 0)
 
@@ -100,7 +100,7 @@ Podemos observar al igual que el anterior que sigue viéndose un patrón, pero n
 Dado que el conjunto de valores que puede generar la sucesión esta entre $0$ a $m-1$,la serie se volverá a repetir cuando en la operación de módulo se vuelva repetir. Podemos ver hasta el momento que si queremos generar mejores números aleatorios el módulo en la operación no debe repetirse, es decir, tratar de que cada vez sea un módulo distinto.
 Por lo tanto, si tenemos una $m$ muy grande tendremos una menor probabilidad de volver a repetir el mismo módulo, ya que el total de casos que puede tomar serian $m-1$:
 
-```{R}
+```r
 # Pruebas para un m muy grande
 generador_congruencial(101, 45, 1000, 67, 0)
 
@@ -115,7 +115,7 @@ $$\frac{xi}{m-1} \qquad  i=0,1,2,3, \dots, n$$
 
 Y vamos también a proponer una semilla automática a nuestra función, la cual será `Sys.time()` que nos dará el tiempo actual, así cada vez que se llame la semilla sera diferente para caja ejecución.
 
-```{R}
+```r
 #' Genenerador lineal congruencial uniforme distribuido entre [0,1]
 #'
 #' @param n es la cantidad de números a generar.
@@ -139,7 +139,7 @@ print(generador_congruencial_u(20, 1000, 67, 0))
 
 Haremos nuestro histograma con $n$ y $m$ muy grande, lo que podemos esperar es que tendríamos cada uno de nuestras barras con diferentes alturas ya que como se menciono anteriormente con $m$ muy grande existe una probabilidad pequeña de que se repita el modulo y que se empiezan a repetir.
 
-```{R}
+```r
 # Para esta prueba tenemos
 # n = 100, m = 1000, a = 342
 nums_pseudo = generador_congruencial_u(100, 1000, 342)
@@ -148,7 +148,7 @@ hist(nums_pseudo, main="Frecuencia de numeros aleatorios")
 
 Como podemos apreciar que nuestro histograma con $n=100$, no hay una estructura bien definida, las alturas van variando, por lo tanto, vemos que la aleatoriedad de nuestro números hasta el momento se ve bien.
 
-```{R}
+```R
 # Prueba con n = 500000, m = 1000, a = 342
 nums_pseudo = generador_congruencial_u(500000, 1000, 342)
 hist(nums_pseudo, main="Frecuencia de numero aleatorios")
@@ -160,7 +160,7 @@ hist(nums_pseudo_2, main="Frecuencia de numero aleatorios")
 ```
 Ahora haciendo nuestro experimento con valores más grandes de $m$ y $a$, podemos ver que el comportamiento cambia ligeramente, en el lado izquierdo vemos como el histograma tiene una cierta forma, dado que se ve como un rectángulo grande bien formado, es decir, cada número tiene la misma frecuencia de salir, por otro lado, vemos que el histograma de lado derecho no se ve uniforme, sino más bien la altura de cada rectángulo varia ligeramente.
 
-```{R}
+```R
 # Prueba con n = 500000, m = 1000, a = 342
 r1 <- generador_congruencial_u(1000, 3245, 234)
 r2 <- generador_congruencial_u(1000, 4536, 432)
@@ -175,17 +175,12 @@ r3_3 <- generador_congruencial_u(1000, 2^31-1, 7^5)
 ```
 
 
-```{R}
-knitr::include_graphics(c("/home/guillermo/hddShare/IIMAS/Semestre2022-1/Probabilidad-Aplicada-y-Simulacion-Estocastica/Practicas/Practica3/img/plot1.png","/home/guillermo/hddShare/IIMAS/Semestre2022-1/Probabilidad-Aplicada-y-Simulacion-Estocastica/Practicas/Practica3/img/plot2.png"))
-```
-
-
 Ahora graficando en $R^3$ se ve más claramente que el conjunto de números del lado izquierdo tiene una estructura o forma, ya que se pueden apreciar lineas verticales por cada número aleatorio, por lo tanto, podemos decir que no tenemos un buen generador de número aleatorios con los parámetros que propusimos,ya que esta formando un patrón visible y que se puede predecir,en cambio, en el lado derecho la gráfica no se ve como una estructura visible o un patrón que se pueda predecir, por consiguiente podemos afirmar que cuando $m$ y $a$ toman valores extremadamente grandes podemos tener buen generador de números pseudoaleatorios.
 
 
 Ahora usaremos nuestro generador para calcular $\pi$ con el experimento de gotas de lluvia. Dado que el código será el mismo de la practica 2 solo cambiaría el generador por el nuestro `generador_congruencial_u` con $m=2^{31} - 1$ y $a=7^5$, omitiré esa parte de código y pondré sólo lo que nos interesa. Primeramente, el tiempo de ejecución para calcular $\pi$ de cada uno de los generadores.
 
-```{R}
+```R
 # Generador runif
 gotas_dentro1 <- function(n){
   x <- runif(n, -1, 1)
@@ -234,7 +229,7 @@ simulacion_lluvia <- function(num_gotas, f, msg="", graficar=FALSE) {
 
 ```
 
-```{R}
+```R
 time_fun <- function(num_gotas, f, f2) {
   t_ini = as.numeric(Sys.time())
   f(num_gotas, f2)
@@ -246,7 +241,7 @@ paste("Tiempo usando GLC: ", time_fun(2000, simulacion_lluvia, gotas_dentro2))
 
 Podemos observar claramente que el tiempo de ejecuación de nuestro generador es mucho mayor que el implementado por R, puede deberse por el tipo de operaciones que realiza nuestro generador, tanto haciendo el módulo como la multiplicación, además de los valores de $m$ y $a$ que deben tomar valores muy grandes para generar números realmente pseudoaleatorios, como consecuencia las operaciones van hacer más tardadas.
 
-```{R}
+```R
 simulacion_lluvia(2000, gotas_dentro1, "con runif", graficar = TRUE)
 simulacion_lluvia(2000, gotas_dentro2, "con GLC", graficar = TRUE)
 ```
@@ -258,6 +253,3 @@ Pudimos entender que la generación de números aleatorias depende de los parám
 Vimos que si se gráfican los números aleatorios de un generador y encontramos una estructura o forma en la gráfica, indica que no es un buen generador, por otro lado, cuando los puntos de una gráfica no tienen una forma o estructura  y es difícil encontrar un patrón, quiere decir que nuestro generador si genera números pseudoaleatorios.
 
 
-
----
-**Nota.** Mi equipo con el que trabaje el código fue con Hugo Rangel, Daniel Acosta y Alejandro León.
