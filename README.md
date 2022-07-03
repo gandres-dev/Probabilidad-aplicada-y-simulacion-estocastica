@@ -8,7 +8,14 @@ Este repositorio contiene notas,practicas, tareas y proyectos del curso de Proba
 <!-- - []() -->
 
 ---
+## [Proyecto (Aplicación de MCMC)](Proyecto/)
+Las técnias de Monte Carlo vía cadenas de Markov permiten generar, de menera iterativa, observaciones de distribuciones multivariadas que difícilmente podrían simularse. 
 
+La idea básica es construir una cadena de Markov que sea fácil de simular y cuya distribución estacionaria corresponda a la distribución objetivo que nos interesa. De esta manera, al implementar correctamente el algoritmo, la convergencia de la cadena está garantizada, independientemente de cuáles sean los valores iniciales.
+
+![demo](Proyecto/img/demo.gif)
+
+---
 ## Temario
 1. **Introducción**
     1. **Modelación y aleatoreidad**
