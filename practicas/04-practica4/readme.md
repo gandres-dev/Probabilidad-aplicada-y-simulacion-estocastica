@@ -26,7 +26,7 @@ Consiste en una repetición de varios ensayos de Bernoulli.
 
 Una vez conociendo estos conceptos, podemos decir que la distribución geométrica consiste en un proceso de Bernoulli. Para simular su variable aleatoria primero empezamos definiendo un ensayo de bernoulli:
 
-```{R}
+```R
 #' Representa un ensayo de bernoulli.
 #'
 #' @param p la probabilidad de éxito.
@@ -46,7 +46,7 @@ bernoulli <- function(p){
 Con ayuda de la probabilidad ingresada como argumento en la función , definiremos el valor de éxito o fracaso dependiente si el valor de `x` es menor o mayor a la probabilidad. La variable `x` sera un número aleatorio que tiene una distribución uniforme ya establecido, para no alterar el experimento y siga siendo un experimento aleatorio.
 
 Para nuestra simulación utilizaremos la función anterior:
-```{R}
+```R
 #' Simulación para la distribución geométrica
 #' 
 #' El número de fracasos antes del primer éxito.
@@ -65,7 +65,7 @@ geometrica <- function(p){
 
 Nuestra función regresara el número de fracasos hasta que encuentre el primer éxito.
 
-```{R}
+```R
 cat('Numeros de fracasos antes del primer exito:',geometrica(0.3))
 ```
 
@@ -76,7 +76,7 @@ Realizaremos ahora una segunda forma de simular nuestra variable aleatoria utili
 \end{equation*}
 Siendo $k$ el número de fracasos.
 
-```{R}
+```R
 #' Simulación para la distribución geométrica, método de intervalos.
 #'
 #' @param p un decimal que representa la probabilidad de éxito.
@@ -97,7 +97,7 @@ geometrica2 <- function(p){
 ```
 
 Para este método pensaremos en una recta numérica del 0 al 1, que representa probabilidades de un evento. Partiremos nuevamente con un número aleatorio que compararemos con la probabilidad de éxito, si la probabilidad de éxito es mayor entonces terminará nuestro ciclo `while` y devolverá el número de fracasos que hubo, en caso contrario, si es mayor a la probabilidad de éxito, significa que hubo un fracaso entonces aumentamos nuestro variable `intervalo` e incrementamos nuestra probabilidad considerando un $k=1$ ya que hubo un fracaso, y con esa probabilidad la sumamos con la anterior ya que observamos que la probabilidad disminuye conforme hay muchos fracasos, es decir, que conforme vamos sumando esa probabilidad con la anterior, hacemos que cada vez tenga mayor éxito que la primera vez. Tiene sentido esto por la forma que esta dada la función de distribución, ya que la probabilidad de fracaso esta elevado por el número de fracaso haciendo que se haga más pequeño ese valor.
-```{R}
+```R
 cat('Numeros de fracasos antes del primer exito:',geometrica2(0.3))
 ```
 
