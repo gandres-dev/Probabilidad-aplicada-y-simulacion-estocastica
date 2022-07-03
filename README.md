@@ -1,14 +1,14 @@
 ## Curso de Probabilidad Aplicada y Simulación Estocástica, IIMAS-UNAM
 Este repositorio contiene notas,practicas, tareas y proyectos del curso de Probabilidad Aplicada y Simulación Estocástica impartido en la [Licenciatura en Ciencia de Datos](https://cienciadatos.iimas.unam.mx/) en el [IIMAS](https://www.iimas.unam.mx/).
 
-## Prácticas
+## [Prácticas](practicas/)
 - [Práctica 1 Matriz de Hilbert y Regla de Simpson](https://github.com/gandres-dev/Probabilidad-aplicada-y-simulacion-estocastica/blob/main/practicas/01-practica1/Practica1_PASE.pdf)
 - [Práctica 2 Calculando pi con gotas de lluvia](https://github.com/gandres-dev/Probabilidad-aplicada-y-simulacion-estocastica/tree/main/practicas/02-practica2)
 - [Práctica 3 Generación de Números Aleatorios](https://github.com/gandres-dev/Probabilidad-aplicada-y-simulacion-estocastica/tree/main/practicas/03-practica3)
 <!-- - []() -->
 
 ---
-## [Proyecto (Aplicación de MCMC)](Proyecto/)
+## [Proyecto (Aplicación de MCMC)](https://nbviewer.org/github/gandres-dev/Probabilidad-aplicada-y-simulacion-estocastica/blob/main/Proyecto/Codigo/Aplicacion-MCMC.ipynb)
 Las técnias de Monte Carlo vía cadenas de Markov permiten generar, de menera iterativa, observaciones de distribuciones multivariadas que difícilmente podrían simularse. 
 
 La idea básica es construir una cadena de Markov que sea fácil de simular y cuya distribución estacionaria corresponda a la distribución objetivo que nos interesa. De esta manera, al implementar correctamente el algoritmo, la convergencia de la cadena está garantizada, independientemente de cuáles sean los valores iniciales.
