@@ -5,6 +5,7 @@ Este repositorio contiene notas,practicas, tareas y proyectos del curso de Proba
 - [Práctica 1 Matriz de Hilbert y Regla de Simpson](https://github.com/gandres-dev/Probabilidad-aplicada-y-simulacion-estocastica/blob/main/practicas/01-practica1/Practica1_PASE.pdf)
 - [Práctica 2 Calculando pi con gotas de lluvia](https://github.com/gandres-dev/Probabilidad-aplicada-y-simulacion-estocastica/tree/main/practicas/02-practica2)
 - [Práctica 3 Generación de Números Aleatorios](https://github.com/gandres-dev/Probabilidad-aplicada-y-simulacion-estocastica/tree/main/practicas/03-practica3)
+- [Práctica 4 Simulación de una variable aleatoria](https://github.com/gandres-dev/Probabilidad-aplicada-y-simulacion-estocastica/tree/main/practicas/04-practica4)
 <!-- - []() -->
 
 ---
