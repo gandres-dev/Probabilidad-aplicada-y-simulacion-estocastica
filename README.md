@@ -8,6 +8,7 @@ Este repositorio contiene notas,practicas, tareas y proyectos del curso de Proba
 - [Práctica 4 Simulación de una variable aleatoria](https://github.com/gandres-dev/Probabilidad-aplicada-y-simulacion-estocastica/tree/main/practicas/04-practica4)
 - [Práctica 5 Método de la Transformada Inversa para V.A. Continuas](https://github.com/gandres-dev/Probabilidad-aplicada-y-simulacion-estocastica/tree/main/practicas/05-practica5)
 - [Práctica 6 Método de Aceptación Rechazo](https://github.com/gandres-dev/Probabilidad-aplicada-y-simulacion-estocastica/tree/main/practicas/06-practica6)
+- [Práctica 7 Convergencia de Binomiales](https://github.com/gandres-dev/Probabilidad-aplicada-y-simulacion-estocastica/tree/main/practicas/07-practica7)
 <!-- - []() -->
 
 ---

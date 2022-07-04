@@ -1,0 +1,240 @@
+---
+title: 'Práctica 7: Convergencia de Binomiales'
+author: "Andrés Urbano Guillermo Gerardo (alumnolcd44)"
+date: "30 de Septiembre del 2021"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+\section{Poisson}
+
+Se tiene que si $\lambda>0$ y $p=\lambda/n$, entonces para todo entero  $r\ge 0$ tenemos
+\
+
+\begin{equation*}
+\lim_{n \to \infty} \binom{n}{r}  p^{r}(1-p)^{n-r} = \frac{e^{-\lambda} \lambda^{r}}{r!}
+\end{equation*}
+
+Este conjunto de límites demuestra que si $(X_n)_{n\ge 1}$ es una secuencia de variables aleatorias donde $X_n$ tiene distribución Binomial($n,\lambda/n)$ entonces $(X_n)_{n\ge 1}$ converge en distribución a una variable $X$ con distribución Poisson($\lambda$).
+
+\section{Normal}
+Fijamos $p\in (0,1)$ y definimos, para todo entero $n\ge 1$, $X_n = $Binomial$(n,p)$ y
+
+\begin{equation*}
+    Y_n = \frac{X_{n} - np }{\sqrt{np(1-p)}}.
+\end{equation*}
+
+Entonces se tiene que $(Y_n)_{n\ge 1}$ converge en distribución a $Y$, donde $Y$ es una variable aleatoria con distribución normal estándar. 
+
+
+\section{Ejercicios}
+
+\begin{enumerate}
+    \item Confirmaremos gráficamente que si $\lambda>0$, $p=\lambda/n$ y $n$ es \emph{muy grande}, entonces para todo entero  $r\ge 0$ 
+
+\begin{equation*}
+\binom{n}{r}  p^{r}(1-p)^{n-r} \sim  \frac{e^{-np} (np)^{r}}{r!}
+\end{equation*}
+\begin{itemize}
+    \item Para $\lambda=5$, $10$ y para tres $n$ distintos, grafiquen ambas funciones (de $r$) superpuestas. En este ejercicio puedes usar \textit{dbinom()} y \textit{dpois()}.
+
+Para estas gráficas se sugiere usar las siguientes funciones. 
+
+~~~
+    plot(,type = 's',col= 'red')
+    par(new=TRUE)
+    lines(,type= 's',col = 'blue')
+~~~
+
+Con sus correspondientes parámetros, genera algo como la figura 1. 
+
+
+Usen colores para distinguir las gráficas.
+    \item ¿Para $\lambda$ fijo, qué valores de $n$ hacen una buena la aproximación?
+    \item Si $X_n=$Binomial($n,p$) y $X=$Poisson($\lambda$), calcula numéricamente el siguiente error (justifica tus resultados):
+
+\begin{equation*}
+    \max_{k\ge 0}  \{ | P(X_{n} = k) - P(X = k)|\}
+\end{equation*}
+\end{itemize}
+\item Para el caso de que $p\in (0,1)$ sea fijo y la convergencia (de las variables reescaladas) sea a una variable normal. Compara las funciones de probabilidad y densidad, usando (a) ó (b):
+
+
+\begin{enumerate}
+\item $X_n$ y $X = N(np,\sqrt{np(1-p)})$
+\item $Y_n$ y $Y = N(0,1)$
+\end{enumerate}
+\begin{itemize}
+    \item Probar con $p = 0.1$, $0.6$ y $0.85$, \item ¿Para qué valores de $n$ la dirías que ya tienes una buena aproximación?
+    \item Propón un criterio numérico alternativo al \textit{máx} para medir la velocidad de la convergencia.
+    \end{itemize}
+
+\end{enumerate}
+**Observación**: Para calcular la función de probabidad de $Y_n$ solo se tiene que centrar la gráfica de $P(X_n  =k) = P(Y_n = \frac{k-np}{\sqrt{np(1-p)}})$
+
+
+
+Nota: No olvides poner el número de alumno en Moodle, y si desean poner su nombre que sea empezando por el apellido paterno pues así esta en la lista.
+
+
+# Aproximacion Binomial-Poisson
+Generaremos variables aleatorias con numeros de enseyos variables para ir graficando cada uno
+de ella con la distribución de binomial, al mismo tiempo, definiremos un $\lambda$ con valores de $5$ y $10$. Una vez definido nuestro lambda, podemos conocer la propabilidad de exito para nuestro variables binomiales:
+
+
+
+
+\begin{align*}
+\lambda &= n p\\
+p &= \frac{\lambda}{n}
+\end{align*}
+
+
+```{r}
+#' Compara las funciones de probabilidad binomial y poisson
+#'
+#' @param x # Variables aleatorias
+#' @param n # Numero de ensayos
+#' @param lambda  # Promedio de ocurrencias
+#'
+#' @return None 
+comparar_funciones <- function(x, n, lambda) {
+  
+  # lambda = np (promedio de ocurrencias)
+  # p = lambda / n
+  p = lambda / n # Probabilidad de éxito
+  
+  # Variable aleatorias binomiales
+  # Modela: Numero de éxitos en n ensayos.
+  y <- dbinom(x, n, p)
+  plot(x, y, type = 's', col = 'red')
+  
+  par(new = 'True')
+  
+  # Variables aleatorias poisson
+  # Modela: Numero de ocurrencias de eventos muy pocos problables, pero
+  # tienen muchos individuos que pueden activarlo
+  y <- dpois(x, lambda)
+  plot(x, y, type = 's', col = 'blue')  
+  
+  legend("topright", legend = c("binomial", "poisson"),
+         lwd = 3, col = c("red", "blue"))
+}
+```
+
+En nuestro codigo usaremos las funciones incorporadas para la funcion de masa `dbinom` y `dpois`, solo necesitaresmo para un vector `x` que representen un conjunto de valores de variables aleatorias, una `n` para el número de ensayos y por último un $\lambda$ para la distribución de Poisson. Con esto parametros podremos conocer la probabilidad éxito para la distribución binomial.
+
+```{r, eval=FALSE}
+# Para lambda = 5
+lambda = 5
+n = 10
+x = 1:n  
+comparar_funciones(x, n, lambda)
+
+n = 30
+x = 1:n  
+comparar_funciones(x, n, lambda)
+
+n = 100
+x = 1:n  
+comparar_funciones(x, n, lambda)
+
+#------------------------------------------------------ 
+# Para lamda = 10
+lambda = 10
+n = 20
+x = 1:n  
+comparar_funciones(x, n, lambda)
+
+n = 40
+x = 1:n  
+comparar_funciones(x, n, lambda)
+
+n = 100
+x = 1:n  
+comparar_funciones(x, n, lambda)
+
+#------------------------------------------------------
+```
+
+```{R,echo=FALSE,out.width="40%",fig.cap="Comparación con diferentes n y un lambda=5",fig.show='hold',fig.align='center'}
+knitr::include_graphics(c("/home/guillermo/hddShare/IIMAS/Semestre2022-1/Probabilidad-Aplicada-y-Simulacion-Estocastica/Practicas/Practica7/img/Rplot.png","/home/guillermo/hddShare/IIMAS/Semestre2022-1/Probabilidad-Aplicada-y-Simulacion-Estocastica/Practicas/Practica7/img/Rplot01.png", "/home/guillermo/hddShare/IIMAS/Semestre2022-1/Probabilidad-Aplicada-y-Simulacion-Estocastica/Practicas/Practica7/img/Rplot02.png"))
+```
+
+
+```{R,echo=FALSE,out.width="40%",fig.cap="Comparación con diferentes n y un lambda=10",fig.show='hold',fig.align='center'}
+knitr::include_graphics(c("/home/guillermo/hddShare/IIMAS/Semestre2022-1/Probabilidad-Aplicada-y-Simulacion-Estocastica/Practicas/Practica7/img/Rplot03.png","/home/guillermo/hddShare/IIMAS/Semestre2022-1/Probabilidad-Aplicada-y-Simulacion-Estocastica/Practicas/Practica7/img/Rplot04.png", "/home/guillermo/hddShare/IIMAS/Semestre2022-1/Probabilidad-Aplicada-y-Simulacion-Estocastica/Practicas/Practica7/img/Rplot05.png"))
+```
+
+Observamos que con un $n=10$ las dos distribuciones tiene un desfase, pero conforme vamos aumentando la $n$ ese desfase va disminuyendo de tal modo que cuando tenemos $n=100$ parece ser casi la misma grafica.
+
+### Calculando el error
+
+```{r, eval=FALSE}
+# Encontrando el error
+lambda = 5
+n = 50
+X = 1:n
+p = lambda / n # Probabilidad de éxito
+errors = abs(dbinom(X, n, p) - dpois(X, lambda)) 
+plot(X, errors, col='red', pch=20, main="Errores lambda=5, n=50")
+# Error maximo
+print(max(errors))
+```
+
+
+```{R,echo=FALSE,out.width="40%",fig.cap="Comparando el error con diferentes lambdas",fig.show='hold',fig.align='center'}
+knitr::include_graphics(c("/home/guillermo/hddShare/IIMAS/Semestre2022-1/Probabilidad-Aplicada-y-Simulacion-Estocastica/Practicas/Practica7/img/Rplot-e.png","/home/guillermo/hddShare/IIMAS/Semestre2022-1/Probabilidad-Aplicada-y-Simulacion-Estocastica/Practicas/Practica7/img/Rplot-e2.png"))
+```
+
+
+Vemos que al principio el margen de error varia, pero conforme se aumenta el valor de la variable aleatoria converge a un valor con un error significativo. Al analizar las gráficas el error máximo que podemos encontrarnos sera de $0.009457231$ y despues converga a un error minimo, podemos también ver al tener una $n=20$ el error sera mínimo, siendo cada vez mejor. Al igual con $\lambda=5$ tambien sucedera con $\lambda=10$ el valor del error convergerá aproximadamente con una $n=30$.
+
+
+Ahora aproximaremos con la funcion normal, tomando tres $p$ distintintas:
+```{r, eval=FALSE}
+comparar_binom_normal <- function(x, n, p, titulo) {
+  Xn = dbinom(x, n, p)
+  plot(x, Xn, type = 's', col = 'red', main=titulo)
+  par(new = 'True')
+  
+  X = dnorm(x, n*p, sqrt(n*p*(1-p)))
+  
+  plot(x, X, type = 'l', col = 'blue')  
+}
+n = 60
+p = 0.1
+x = 1:n
+comparar_binom_normal(x, n, p, "Con n=60 y p=0.1")
+legend("topright", legend = c("binomial", "normal"),
+       lwd = 3, col = c("red", "blue"))  
+```
+
+```{R,echo=FALSE,out.width="40%",fig.cap="Aproximando a la normal con tres p distintas",fig.show='hold',fig.align='center'}
+knitr::include_graphics(c("/home/guillermo/hddShare/IIMAS/Semestre2022-1/Probabilidad-Aplicada-y-Simulacion-Estocastica/Practicas/Practica7/img/Rplotn.png","/home/guillermo/hddShare/IIMAS/Semestre2022-1/Probabilidad-Aplicada-y-Simulacion-Estocastica/Practicas/Practica7/img/Rplot06n-2.png","/home/guillermo/hddShare/IIMAS/Semestre2022-1/Probabilidad-Aplicada-y-Simulacion-Estocastica/Practicas/Practica7/img/Rplot06n-3.png"))
+```
+
+Observamos que con tres probabilidades distintas la graficas van cambiando acercándose al eje $y$ y alejandose de el, vemos que cuando la probabilidad de exito es de $0.1$ la forma de la gráfica esta más cerca del eje $y$ y la comparación de la distribucion normal esta adentro de la grafica de la distribución binomial, cuando vamos aumentando la probabilidad la gráfica se va desplazando hacia la derecha. 
+
+```{r, eval=FALSE}
+n = 280
+p = 0.5
+x = 1:n
+comparar_binom_normal(x, n, p, "Con n=280 y p=0.85")
+legend("topright", legend = c("binomial", "normal"),
+       lwd = 3, col = c("red", "blue"))  
+```
+
+
+```{R,echo=FALSE,out.width="40%",fig.cap="Aproximando a la normal con tres p distintas",fig.show='hold',fig.align='center'}
+knitr::include_graphics(c("/home/guillermo/hddShare/IIMAS/Semestre2022-1/Probabilidad-Aplicada-y-Simulacion-Estocastica/Practicas/Practica7/img/Rplotnormal.png"))
+```
+
+Haciendo varias prueba pudimos encontrar que con una $n=280$ y $p=0.85$ la distribución de la normal y binomial obtuvieron una muy buena aproximación. Concluyendo que es verdad que la binomial converge a la normal cuando $n$ se hace muy grande.
+
+
