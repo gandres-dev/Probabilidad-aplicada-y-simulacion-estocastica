@@ -1,0 +1,174 @@
+---
+title: 'Práctica 10: Multinomiales e Independencia'
+author: "Andrés Urbano Guillermo Gerardo (Alumnolcd44)"
+date: "19 de Octubre del 2021"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+\section{Multinomial}
+En [1] se puede encontrar la siguiente definición: 
+
+Consideremos un experimento $E$, su espacio
+muestra $S$ y una partición de $S$ en $k$ eventos mutuamente excluyentes
+$A_l,\ldots, A_k$. Considérese $n$ repeticiones independientes del experimento $E$. 
+Sea $p_i = \mathbb{P}(A_i)$ y supóngase que $p_i$ permanece constante durante todas las
+repeticiones. Desde luego tenemos $\sum_{i=1}^{k}p_i = 1$. 
+
+Definamos las variables
+aleatorias $X_1,\ldots, X_k$, como sigue: para $i = 1,\ldots, k$, sea $X_i$ el número de veces que $A_i$ ocurre entre las $n$ repeticiones de
+$\epsilon$. 
+
+Las $X_i$ no son variables aleatorias independientes, puesto que
+$\sum_{i = 1}^{k}X_i = n$. Entonces, tan pronto como el valor de cualquiera de las
+$(k-1)$ variables aleatorias es conocido, se restringe el valor de las otras.
+
+Si $X_i$, $i = 2,. . . , k$ están definidas como antes, tenemos que si $\sum_{i=1}^{k}n_i = n$, entonces
+\begin{equation*}
+    \mathbb{P}(X_1 = n_1, X_2 = n_2, \ldots, X_k = n_k) = \frac{n!}{n_1!\cdot  n_2! \cdots  n_k!} p_{1}^{n_1}\cdots p_{k}^{n_k}.
+\end{equation*}
+
+Un algoritmo para generar $X$ con distribución multinomial y parámetros $n, p_1,\ldots, p_k$ es el siguiente: 
+
+\begin{enumerate}
+    \item Genera variables aleatorias i.i.d. $Y_j$ con función de probabilidad de masa $\mathbb{P}(Y_j = i) = p_i $ con $i=1,2,\ldots ,k$.
+    \item Definimos $X_i  = \sum_{j = 1}^{n} \mathbb{1}_{(Y_j = i)}$
+\end{enumerate}
+
+
+\section{Ejercicios}
+
+\begin{enumerate}
+    \item Utilice el código de la práctica 9 o la función \textit{rnorm()} para generar parejas $(X,Y)$ de variables independientes con distribución $\mathbf{N}(0,1)$.
+   \begin{itemize}
+    \item Grafica 1000 puntos $(X,Y)$ y verifica cualitativamente que $X$ y $Y$ son independientes.
+    \item Define $Z = X-Y$, $W = X + Y$ y grafica mil puntos $(Z,W)$.
+    \item Comenta lo que observas en ambos casos.
+\end{itemize}
+    \item 
+\end{enumerate}
+
+
+
+
+Realiza una representación gráfica de ($X_1,X_2,X_3$) de una Multinomial($n,p_1,p_2,p_3$) con $p_1,p_2,p_3 = \frac{1}{3}$ y distintos valores para n.
+
+Simula 1000 copias de ($X_1,X_2,X_3$) y grafica los puntos ($X_1,X_2$)
+¿Qué tipo de correlación observas cuando n crece?
+
+\hspace{1cm}
+
+[1] Meyer, P $\&$ Pardo,C. (1973). \textit{Probabilidad y Aplicaciones Estadisticas}. Estados Unidos: ADDISON-WESLEY IBEROAMERICANA.
+
+
+No olviden poner el número de alumno en Moodle, y si desean poner su nombre que sea empezando por el apellido paterno pues así esta en la lista. 
+
+---
+
+Comprobaremos el comportamiento de dos variables aleatorias con distribución normal, para eso definiremos primero $1000$ variables aleatorias normales y obtendremos su gráfica:
+```{R, eval=FALSE}
+n <- 1000
+X <-rnorm(n, 0, 1)
+Y <-rnorm(n, 0, 1)
+plot(X, Y)
+```
+
+```{R,echo=FALSE,out.width="40%",fig.cap="Para n=1000",fig.show='hold',fig.align='center'}
+knitr::include_graphics(c("/home/guillermo/hddShare/IIMAS/Semestre2022-1/Probabilidad-Aplicada-y-Simulacion-Estocastica/Practicas/Practica10/img/Rplot.png"))
+```
+
+Vemos que se forma una nube de puntos en la gráfica, esto nos indica que las variables son independientes ya que no se forma una función en particular, es decir si hubiéramos visto una recta esto nos indicaría que las variables son dependientes. 
+Ahora graficaremos otras variables aleatorias definidas con las anteriores:
+```{R, eval=FALSE}
+Z <- X-Y
+W <- X+Y
+plot(Z, W)
+```
+
+```{R,echo=FALSE,out.width="40%",fig.cap="Para n = 1000 ",fig.show='hold',fig.align='center'}
+knitr::include_graphics(c("/home/guillermo/hddShare/IIMAS/Semestre2022-1/Probabilidad-Aplicada-y-Simulacion-Estocastica/Practicas/Practica10/img/Rplot01.png"))
+```
+
+Vemos ahora que nuestra distribución de puntos se expandió a lo ancho y lo observamos a partir del eje Z que va de $-4$ a $4$ formándose una silueta de una elipse, podemos ver que nuestras variables siguen conservando la independencia dado que sigue siento una nube de puntos.
+
+
+Simularemos ahora vectores multinomiales que consiste en generar experimentos donde salgan $k$ resultados diferentes y luego repetir este experimento $n$ veces, iremos contando cada uno de los resultados al hacer los $n$ experimentos. Para la implementación creamos una función que generará vectores multinomiales:
+```{R}
+#' Generar una variables aleatorias multinomiales de tres resultados posibles
+#' por las probabilidades dada por p1,p2,p3
+#'
+#' @param n - numero de ensayos
+#' @param p1 - probabilidad de éxito para x1
+#' @param p2 - probabilidad de éxito para x2
+#' @param p3 - probabilidad de éxito para x3
+#'
+#' @return un vector multinomial
+multinomial <- function(n, p1, p2, p3) {
+  Xn = c(0, 0, 0);
+  for (i in 1:n) {
+    u = runif(1);
+    if (u <= p1) {
+      Xn[1] <- Xn[1]+1;
+    } else if (u <= p1+p2) {
+      Xn[2] <- Xn[2]+1;
+    } else {
+      Xn[3] <- Xn[3]+1;
+    }
+  }
+  return(Xn)
+}
+X = multinomial(10, 0.3, 0.4, 0.1)
+print(X)
+```
+
+En cada uno de estos $n$ experimento debemos de ir guardando cuantas veces sale
+uno de los $x1, x2$ y $x3$ posibles, considerando su probabilidad $p1,p2$ y $p3$.
+Para la simular variables discretas utilizamos el método de los intervalos que utiliza la idea de la distribución acumulativa, sabemos que la suma de todas las probabilidades deben de ser $1$, entonces definimos una recta de longitud $1$ y la segmentamos según las probabilidades dadas, en este caso p1 sera el primer intervalo, el segundo será la suma de $p1+p2$ y el tercero sera el restante. Generaremos un número pseudoaleatorio entre $0$ y $1$ y veremos en que parte de la recta caí y dado su ubicaciones iremos aumentacion el valor de Xn en $1$ para cada iteración, es decir, veremos cuantas veces salio cada uno de los resultados y la suma de todos $Xn$ nos tiene que dar $n$.
+
+Graficaremos ahora para diferentes $n$:
+```{R, eval=FALSE}
+x = c()
+y = c()
+z = c()
+
+for (i in 1:150) {
+  Xn = multinomial(i,0.3, 0.4, 0.1)
+  x[i] = Xn[1]
+  y[i] = Xn[2]
+  z[i] = Xn[3]
+}
+scatterplot3d(x, y, z, pch=16, color='salmon')
+```
+
+```{R,echo=FALSE,out.width="40%",fig.cap="Para n = 150 en 3D",fig.show='hold',fig.align='center'}
+knitr::include_graphics(c("/home/guillermo/hddShare/IIMAS/Semestre2022-1/Probabilidad-Aplicada-y-Simulacion-Estocastica/Practicas/Practica10/img/Rplot02.png"))
+```
+
+Dado que tendremos tres valores, graficaremos en 3D donde cada punto representa un vector mutinomial generado por nuestra función, vemos que tiene una forma de plano inclinado con pendiente positiva. Ahora usaremos una proyección usando solamente $2$ variables aleatorias X1 y X2:
+
+```{R, eval=FALSE}
+x = c()
+y = c()
+z = c()
+
+for (i in 1:1000) {
+  Xn = multinomial(i,0.3, 0.4, 0.1)
+  x[i] = Xn[1]
+  y[i] = Xn[2]
+  z[i] = Xn[3]
+}
+plot(x, y)
+```
+
+```{R,echo=FALSE,out.width="40%",fig.cap="Para n = 1000",fig.show='hold',fig.align='center'}
+knitr::include_graphics(c("/home/guillermo/hddShare/IIMAS/Semestre2022-1/Probabilidad-Aplicada-y-Simulacion-Estocastica/Practicas/Practica10/img/Rplot03.png"))
+```
+
+Observamos que con $n=1000$ se aprecia la agrupación de puntos con una tendencia lineal, es decir, si hacemos una regresión lineal, tendremos una recta con pendiente positiva. Podemos concluir que las variables son independientes ya que vemos una recta que significaría que las variables dependen de un valor, y es verdad ya que sabemos que la suma de $X_1 + X_2, \ldots, + X_n = n$, donde se ve la dependencia con $n$. 
+
+
