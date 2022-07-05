@@ -15,6 +15,7 @@ Para hacer la generación de variables aleatorias nosotros propondremos valores 
 
 
 Procedimiento para encontrar la $F^{-1}(u)$ de la variable aleatoria Weibull: 
+
 $$
 \begin{equation*}
 \begin{split}
@@ -32,6 +33,7 @@ $$
 \end{split}    
 \end{equation*}
 $$
+
 ```r
 library("SciViews")
 #' Función de densidad weibul
@@ -112,6 +114,7 @@ Vemos que nuestras variables aleatorias generados con el método de la transform
 ----
 
 Procedimiento para encontrar la $F^{-1}(u)$ de la variable aleatoria Pareto:
+
 $$
 \begin{equation*}
 \begin{split}
