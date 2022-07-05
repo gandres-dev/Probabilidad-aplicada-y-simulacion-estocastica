@@ -13,6 +13,7 @@ Este repositorio contiene notas,practicas, tareas y proyectos del curso de Proba
 - [Práctica 9 Convergencia](https://github.com/gandres-dev/Probabilidad-aplicada-y-simulacion-estocastica/tree/main/practicas/09-practica9)
 - [Práctica 10 Multinomiales e Independencia](https://github.com/gandres-dev/Probabilidad-aplicada-y-simulacion-estocastica/tree/main/practicas/10-practica10)
 - [Práctica 11 Transformaciones y Densidad Condicional](https://github.com/gandres-dev/Probabilidad-aplicada-y-simulacion-estocastica/tree/main/practicas/11-practica11)
+- [Práctica 12 Introducción a Cópulas](https://github.com/gandres-dev/Probabilidad-aplicada-y-simulacion-estocastica/tree/main/practicas/12-practica12)
 <!-- - []() -->
 
 ---
