@@ -11,11 +11,11 @@ Generación de variables aleatorias a partir del método de la transformada inve
 
 Ubicaremos nuestra función de distribución acumulada y obtendremos su función inversa, a partir de ahí podremos generar variables aleatorios que estarán ubicadas en eje x de la función de distribución.
 
-Para hacer la generación de variables aleatorias nosotros propondremos valores pseudoaleatorios entre [0,1] que representar probabilidades de nuestra función de distribución acumulada y usando la función inversa obtendremos sus variables aleatorias.\
+Para hacer la generación de variables aleatorias nosotros propondremos valores pseudoaleatorios entre [0,1] que representar probabilidades de nuestra función de distribución acumulada y usando la función inversa obtendremos sus variables aleatorias.
 
-\ \
+
 Procedimiento para encontrar la $F^{-1}(u)$ de la variable aleatoria Weibull: 
-
+$$
 \begin{equation*}
 \begin{split}
     F(x, \lambda , k) & = 1 - e^{-(\frac{x}{\lambda})^k}\\
@@ -31,7 +31,7 @@ Procedimiento para encontrar la $F^{-1}(u)$ de la variable aleatoria Weibull:
      F^{-1}(u, \lambda, k) &= [-ln(1 - u)]^{\frac{1}{5}}
 \end{split}    
 \end{equation*}
-
+$$
 ```r
 library("SciViews")
 #' Función de densidad weibul
@@ -112,7 +112,7 @@ Vemos que nuestras variables aleatorias generados con el método de la transform
 ----
 
 Procedimiento para encontrar la $F^{-1}(u)$ de la variable aleatoria Pareto:
-
+$$
 \begin{equation*}
 \begin{split}
     F(x, a, b) &= 1 - (\frac{b}{b+x})^{a}\\
@@ -126,7 +126,7 @@ Procedimiento para encontrar la $F^{-1}(u)$ de la variable aleatoria Pareto:
     F^{-1}(u, a, b) &= \frac{3}{(1 - u)^{\frac{1}{10}}} - 3
 \end{split}    
 \end{equation*}
-
+$$
 
 ```r
 #' Función de densidad pareto.
@@ -202,8 +202,7 @@ plot(va_pareto, densidad_pareto(va_pareto, 10 ,3), pch = 20, cex = 0.3, col = 'b
 ```
 
 
-Agregar un  breve comentario que explique en que situaciones se utilizan estas variables, y finalmente un comentario que explique por que la implementación de este algoritmo sería ineficiente para generar la variable aleatoria $Normal(\mu,\sigma^2)$. \
-\newline \
+Agregar un  breve comentario que explique en que situaciones se utilizan estas variables, y finalmente un comentario que explique por que la implementación de este algoritmo sería ineficiente para generar la variable aleatoria $Normal(\mu,\sigma^2)$. 
 
 
 Las situaciones en las cuales podremos utilizar este procedimiento será cuando nuestra función sea biyectiva, ya que si no es biyectiva no podria tener una función inversa. Este procedimiento es muy util para hacer simulaciones y ver el comportamiento. 
