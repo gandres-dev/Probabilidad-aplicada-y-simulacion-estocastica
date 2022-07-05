@@ -10,6 +10,7 @@ Este repositorio contiene notas,practicas, tareas y proyectos del curso de Proba
 - [Práctica 6 Método de Aceptación Rechazo](https://github.com/gandres-dev/Probabilidad-aplicada-y-simulacion-estocastica/tree/main/practicas/06-practica6)
 - [Práctica 7 Convergencia de Binomiales](https://github.com/gandres-dev/Probabilidad-aplicada-y-simulacion-estocastica/tree/main/practicas/07-practica7)
 - [Práctica 8 Ley de los grandes números](https://github.com/gandres-dev/Probabilidad-aplicada-y-simulacion-estocastica/tree/main/practicas/08-practica8)
+- [Práctica 9 Convergencia](https://github.com/gandres-dev/Probabilidad-aplicada-y-simulacion-estocastica/tree/main/practicas/09-practica9)
 <!-- - []() -->
 
 ---

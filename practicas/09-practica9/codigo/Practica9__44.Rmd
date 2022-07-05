@@ -1,0 +1,108 @@
+---
+title: "Práctica 9: Convergencia"
+author: "Andrés Urbano Guillermo Gerardo (alumnolcd44)"
+date: "14 de Octubre del 2021"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+\
+\section{Teorema central de límite}
+
+Sean $X_1,X_2, ... , X_k$ variables aleatorias independientes e idénticamente distribuidas con media $\mu$ y varianza $\sigma^2 < \infty$, entonces
+
+
+$$\frac{\sum_{i=1}^{k}X_{i} - k\mu}{\sqrt{k\sigma^2}}  \overset{d}{\to} Z \hspace{1cm} \text{donde} Z \sim N(0,1)$$ 
+
+\section{Ejercicio}
+
+Utiliza el Teorema para generar un programa que simule una variable aleatoria $N(0,1)$ a partir de $binomiales(n,p)$.
+
+Generen seis histogramas de $10000$ v.a. normales con los siguientes parámetros:
+\begin{itemize}
+    \item $n = 10$, $p = 0.5$, $k = 10$, $20$, $100$, $1000$
+    \item $n = 10$, $p = 0.99$, $k = 10$, $20$, $100$, $1000$
+\end{itemize}
+
+Comparen los histogramas con la función de densidad teórica de la normal estándar, para esto pueden hacer:
+
+El comando dará error si no has generado antes el histograma.
+
+\newpage
+
+Observaciónes: Para genererar $k$ $Binomiales(n,p)$ en R existe el comando \textit{rbinom(k,n,p)}, la media de una v.a. $Binomial(n,p)$ es $n*p$ y su varianza es $np(1-p)$. Su reporte debe tener ocho figuras.
+
+¿Cuál converge más rápido? ¿Por qué?
+ 
+Nota: No olviden poner el número de alumno en Moodle, y si desean poner su nombre que sea empezando por el apellido paterno pues así esta en la lista. 
+
+### Teorema central de límite
+
+Para implementar el teorema del limite central, crearemos una funcion que se encargara de encontrar la variables aleatoria $z$, estará formada de esta forma:
+
+```{R}
+#' Teorema del limite central
+#'
+#' @param X - vector de variables aleatorias
+#' @param mu - media
+#' @param varianza - varianza
+#'
+#' @return - variable aleatoria N(0,1)
+teorema_limite_central <- function(X, mu, varianza) {
+  k <- length(X)
+  z <- (sum(X) - k*mu) / (k*varianza)^(1/2)
+  return(z)
+}
+```
+
+Para encontrar la convercia hacia una distribución normal, lo que haremos será generar $1000$ variables aleatorias usando el teorema del limite centro, esto nos dará variableas aleatorias que corresponden a una distribución normal $N(0,1)$, para demostrarlo implementaremos esta función:
+
+```{R}
+
+#' Simula variable aleatorias N(0,1) a partir de binomiales(n,p)
+#'
+#' @param N - numero de variables aleatorias Z
+#' @param n - numero de ensayos para la 
+#' @param p - Probabilidad de exito
+#' @param k - total de binomiales
+#'
+#' @return - una grafica y un histograma
+simular_Z <- function(N, n, p, k, msg="") {
+  q <- 1-p
+  mu <- n*p
+  varianza <- n*p*q 
+  Z_uniform <- c()
+  for (i in 1:N){
+    binomiales <- rbinom(k, n, p)
+    Z_uniform[i] <- teorema_limite_central(binomiales, mu, varianza)
+  }
+  hist(Z_uniform, main=paste('Teorema del limite central\n',msg), col='salmon', prob = TRUE)
+  par(new = TRUE )
+  sop <- seq( -5 ,5 , by=0.1 )
+  plot(sop, dnorm(sop), type='l', col='blue', lwd=2)  
+}
+
+```
+
+En esta función generaremos $1000$ variables aleatorias uniformes y las graficaremos para demostrar nuestra hipótesis, graficaremos un histograma de nuestras variables $Z$ y la vez la silueta de la distribución normal estándar. Ahora ya no seran promedios parciales como vimos anteriormente para la ley de los grandes números, sino usaremos suma parciales renormalizadas en cada iteración. Un detalle importante es que generaremos variables binomales que convergeran a la distribución normal.
+
+
+```{R,echo=FALSE,out.width="40%",fig.cap="Comparación Para n = 10, p = 0.5, k = 10, 20, ,100, 1000",fig.show='hold',fig.align='center'}
+knitr::include_graphics(c("/home/guillermo/hddShare/IIMAS/Semestre2022-1/Probabilidad-Aplicada-y-Simulacion-Estocastica/Practicas/Practica9/img/Rplot.png","/home/guillermo/hddShare/IIMAS/Semestre2022-1/Probabilidad-Aplicada-y-Simulacion-Estocastica/Practicas/Practica9/img/Rplot01.png", "/home/guillermo/hddShare/IIMAS/Semestre2022-1/Probabilidad-Aplicada-y-Simulacion-Estocastica/Practicas/Practica9/img/Rplot02.png", "/home/guillermo/hddShare/IIMAS/Semestre2022-1/Probabilidad-Aplicada-y-Simulacion-Estocastica/Practicas/Practica9/img/Rplot03.png"))
+```
+
+Vemos que cuando tenemos como parámetro $p=0.5$ nuestro histograma fácilmente se puede observar como converge a una distribución normal, a pesar haber variado los parámetros $k=10, k=20, k=100, k=100$ no varia mucho, sigue teniendo la silueta de una normal. Puede deberse que le hemos asignado una probabilidad fija de $0.5$.
+
+```{R,echo=FALSE,out.width="40%",fig.cap="Comparación Para n = 10, p = 0.99, k = 10, 20, ,100, 1000",fig.show='hold',fig.align='center'}
+knitr::include_graphics(c("/home/guillermo/hddShare/IIMAS/Semestre2022-1/Probabilidad-Aplicada-y-Simulacion-Estocastica/Practicas/Practica9/img/Rplot04.png","/home/guillermo/hddShare/IIMAS/Semestre2022-1/Probabilidad-Aplicada-y-Simulacion-Estocastica/Practicas/Practica9/img/Rplot05.png", "/home/guillermo/hddShare/IIMAS/Semestre2022-1/Probabilidad-Aplicada-y-Simulacion-Estocastica/Practicas/Practica9/img/Rplot06.png", "/home/guillermo/hddShare/IIMAS/Semestre2022-1/Probabilidad-Aplicada-y-Simulacion-Estocastica/Practicas/Practica9/img/Rplot07.png"))
+```
+
+Podemos ver un gran contraste cuando tenemos $P=0.99$ para $k$ diferente, al principio con una $k=10$ los valores están muy alejados hacia los costados, conforme vamos aumentando $k$ el histograma se va comportando más a la distribución normal, moviendo haciendo a la derecha y llenando poco a poco la silueta de la distribución normal.
+
+
+Podemos concluir que dada cualquier función de distribución y usando el teorema del limite central, las variables de esa distribución convergerá a hacia una distribución normal estándar. Esto es increíble dado que reafirmamos nuevamente la aparición de la distribución normal y su importancia, ya que para cual variables aleatoria de una distribución, usando el TLC veremos convergerá a una normal.
+
+
