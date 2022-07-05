@@ -15,6 +15,7 @@ Este repositorio contiene notas,practicas, tareas y proyectos del curso de Proba
 - [Práctica 11 Transformaciones y Densidad Condicional](https://github.com/gandres-dev/Probabilidad-aplicada-y-simulacion-estocastica/tree/main/practicas/11-practica11)
 - [Práctica 12 Introducción a Cópulas](https://github.com/gandres-dev/Probabilidad-aplicada-y-simulacion-estocastica/tree/main/practicas/12-practica12)
 - [Práctica 13 Problema de la ruina](https://github.com/gandres-dev/Probabilidad-aplicada-y-simulacion-estocastica/tree/main/practicas/13-practica13/Practica13_PASE.pdf)
+- [Práctica 14 Cadenas de Markov](https://github.com/gandres-dev/Probabilidad-aplicada-y-simulacion-estocastica/tree/main/practicas/14-practica14/Practica14_PASE.pdf)
 <!-- - []() -->
 
 ---
